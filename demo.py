@@ -8,5 +8,5 @@ def get_ner_response(text):
     response = requests.post(url, data)
     return response.text
 
-text = 'Am mers cu Andreea la Palatul Culturii, apoi am urcat spre Piata Unirii. Dupa ce am plecat din piata am coborat spre Gara.'
+text = 'Am mers cu Andreea la Palatul Culturii, apoi am urcat spre Piata Unirii. Dupa ce am plecat din piata am coborat spre Gara. In final ne-am pornit spre Muzeul de Arta.'
 print(get_ner_response(text))
