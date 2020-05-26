@@ -1,8 +1,9 @@
-import sys
 import ner_service
 import text_processor
 import web_api
 import requests
+from os import listdir
+from os.path import isfile, join
 
 API_KEY = 'AIzaSyAHqyMfdLhmN2t-MeVv6lggmQPoxfDvY9U'
 
@@ -17,9 +18,17 @@ params_get =  {
 PLACES_API_URL = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
 
 def main():
-
-	text = open('sample_text.txt', 'r', encoding = 'utf-8').read()
+	onlyfiles = [f for f in listdir('./texts') if isfile(join('./texts', f))]
+	print("Selectati un text pentru a extrate locatiile:")
+	for i in range(0, len(onlyfiles)):
+		print(f"{i}\t{onlyfiles[i]}")
+	selection = int(input("Select: "))
+	try:
+		text = open('./texts/' + onlyfiles[selection], 'r', encoding = 'utf-8').read()
+	except:
+		text = open('./texts/' + onlyfiles[selection], 'r').read()
 	text_to_process = ner_service.get_ner_response(text)
+	print(text_to_process)
 	
 	locations = text_processor.get_locations(text_to_process)
 	print(locations)
@@ -48,7 +57,8 @@ def main():
 			if len(data) > 0:
 				best_cand = data[0]
 				location_map['book']['locations'].append({
-					'name': location,
+					'name': best_cand['name'],
+					# 'name': location,
 					'latitude': best_cand['geometry']['location']['lat'],
 					'longitude': best_cand['geometry']['location']['lng']
 				})

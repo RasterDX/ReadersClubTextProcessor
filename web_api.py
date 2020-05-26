@@ -8,6 +8,5 @@ add_book = "books/add"
 add_loc = ""
 
 def persist_locations(location_map):
-    clustered_locations = cluster(location_map['book']['locations'])
+    location_map['book']['locations'] =  cluster(location_map['book']['locations'])
     r = requests.post(URL + add_book, json=location_map['book'])
-    print(r.json())
