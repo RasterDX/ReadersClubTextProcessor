@@ -1,8 +1,7 @@
 import requests
 from clustering_service import cluster
 
-URL = "http://localhost:8080/"
-# URL = "https://readers-club-api.herokuapp.com/"
+URL = "https://readers-club-api.herokuapp.com/"
 
 add_book = "books/add"
 add_loc = ""

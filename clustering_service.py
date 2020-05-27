@@ -58,4 +58,5 @@ def cluster(locations):
     print(median)
     print(locs)
     print(len(locs))
+
     return locs
